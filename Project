@@ -1,0 +1,21 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np 
+import random
+
+tiktok=pd.read_csv('multiTimeline (7).csv', header=1)
+
+#for the csv file you need to download the graph off of google trends than uploaed it into jupyter notebook, than you copy the path and put it were multiTimeline (7).csv is. 
+
+cols = tiktok.columns 
+cols = [x.split()[0].lower() if len(x.split())>2 else x.lower() for x in cols]
+tiktok.columns=cols
+
+tiktok['week']= pd.to_datetime(tiktok['week'])
+tiktok = tiktok.replace('<1', 1)
+    
+tiktok.set_index('week', inplace=True)
+
+tiktok.plot(figsize=(14,6))
+
+plt.title('Interest in Tik Tok over time');
